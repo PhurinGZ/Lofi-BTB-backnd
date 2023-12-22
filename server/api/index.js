@@ -23,12 +23,12 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:8080",
+        url: ["http://localhost:8080","https://lofi-btb-backnd.vercel.app"],
         description: "Development server",
       },
     ],
   },
-  apis: ["./routes/*.js"], // Path to the API routes
+  apis: ["../routes/*.js"], // Path to the API routes
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
