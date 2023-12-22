@@ -2,12 +2,12 @@ require("dotenv").config();
 require("express-async-errors");
 const express = require("express");
 const cors = require("cors");
-const connection = require("./db");
-const userRoutes = require("./routes/user");
-const authRoutes = require("./routes/auth");
-const songsRoutes = require("./routes/songs");
-const playlistRoutes = require("./routes/playList");
-const searchRoutes = require("./routes/search");
+const connection = require("../db");
+const userRoutes = require("../routes/user");
+const authRoutes = require("../routes/auth");
+const songsRoutes = require("../routes/songs");
+const playlistRoutes = require("../routes/playList");
+const searchRoutes = require("../routes/search");
 const app = express();
 
 connection();
