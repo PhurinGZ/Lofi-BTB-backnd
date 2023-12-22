@@ -11,11 +11,5 @@
       "src": "/(.*)",
       "dest": "./index.js"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production",
-    "DB": "mongodb+srv://Phuin:a0918742290@cluster0.lebl5er.mongodb.net/?retryWrites=true&w=majority",
-    "JWTPRIVATEKEY": "jwtPrivateKey",
-    "SALT": 10
-  }
+  ]
 }
