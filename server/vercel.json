@@ -4,9 +4,6 @@
     {
       "src": "index.js",
       "use": "@vercel/node"
-    //   "config": {
-    //     "includeFiles": ["./db.js","./middleware/auth.js","./routes/auth.js","./routes/user.js"]
-    //   }
     }
   ],
   "routes": [
