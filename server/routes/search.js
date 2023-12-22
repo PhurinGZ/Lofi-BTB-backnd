@@ -12,6 +12,33 @@ const auth = require("../middleware/auth");
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     SongResponse:
+ *       type: object
+ *       properties:
+ *         data:
+ *           $ref: '#/components/schemas/Song'
+ *
+ *     PlayListResponse:
+ *       type: object
+ *       properties:
+ *         data:
+ *           $ref: '#/components/schemas/PlayList'
+ *
+ *     Song:
+ *       type: object
+ *       properties:
+ *         // Define your Song properties here
+
+ *     PlayList:
+ *       type: object
+ *       properties:
+ *         // Define your PlayList properties here
+ */
+
+/**
+ * @swagger
  * /api/search:
  *   get:
  *     summary: Search for songs and playlists

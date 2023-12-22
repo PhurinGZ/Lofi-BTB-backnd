@@ -3,6 +3,118 @@
  * tags:
  *   name: Playlists
  *   description: API operations related to playlists
+ *
+ * components:
+ *   schemas:
+ *     PlayList:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           example: "60ae100c6fda0441b4725673"
+ *         name:
+ *           type: string
+ *           example: "My Playlist"
+ *         desc:
+ *           type: string
+ *           example: "This is a playlist description"
+ *         img:
+ *           type: string
+ *           example: "https://example.com/playlist-image.jpg"
+ *         user:
+ *           type: string
+ *           example: "60ae0fcb6fda0441b4725672"
+ *         songs:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["60ae0fcb6fda0441b4725672", "60ae0fcb6fda0441b4725673"]
+ *
+ *     Song:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           example: "60ae0fcb6fda0441b4725672"
+ *         title:
+ *           type: string
+ *           example: "My Song"
+ *         artist:
+ *           type: string
+ *           example: "Artist Name"
+ *         duration:
+ *           type: number
+ *           example: 240
+ *
+ *     PlayListInput:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: Name of the playlist
+ *         desc:
+ *           type: string
+ *           description: Description of the playlist
+ *         img:
+ *           type: string
+ *           description: URL of the playlist image
+ *       required:
+ *         - name
+ *
+ *     PlayListResponse:
+ *       type: object
+ *       properties:
+ *         data:
+ *           $ref: '#/components/schemas/PlayList'
+ *
+ *     PlayListEditInput:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: New name of the playlist
+ *         desc:
+ *           type: string
+ *           description: New description of the playlist
+ *         img:
+ *           type: string
+ *           description: New URL of the playlist image
+ *
+ *     AddSongToPlaylistInput:
+ *       type: object
+ *       properties:
+ *         playListId:
+ *           type: string
+ *           description: ID of the playlist
+ *         songId:
+ *           type: string
+ *           description: ID of the song to be added to the playlist
+ *       required:
+ *         - playListId
+ *         - songId
+ *
+ *     RemoveSongFromPlaylistInput:
+ *       type: object
+ *       properties:
+ *         playListId:
+ *           type: string
+ *           description: ID of the playlist
+ *         songId:
+ *           type: string
+ *           description: ID of the song to be removed from the playlist
+ *       required:
+ *         - playListId
+ *         - songId
+ *
+ *     PlayListDetailsResponse:
+ *       type: object
+ *       properties:
+ *         data:
+ *           $ref: '#/components/schemas/PlayList'
+ *         songs:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/Song'
  */
 
 const router = require("express").Router();

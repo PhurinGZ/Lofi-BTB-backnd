@@ -14,6 +14,27 @@ const validObjectId = require("../middleware/validObjectId");
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     SongInput:
+ *       type: object
+ *       properties:
+ *         // Define your SongInput properties here
+
+ *     SongsList:
+ *       type: array
+ *       items:
+ *         $ref: '#/components/schemas/SongResponse'
+
+ *     SongResponse:
+ *       type: object
+ *       properties:
+ *         data:
+ *           $ref: '#/components/schemas/Song'
+ */
+
+/**
+ * @swagger
  * /api/songs:
  *   post:
  *     summary: Create a new song
@@ -47,7 +68,7 @@ router.post("/", authAdmin, async (req, res) => {
   if (error) return res.status(200).send({ message: error.details[0].message });
 
   const song = await Song(req.body).save();
-  res.status(200).send({ data: song, message: "Song cerated successfully" });
+  res.status(200).send({ data: song, message: "Song created successfully" });
 });
 
 /**
@@ -180,7 +201,7 @@ router.delete("/:id", [validObjectId, authAdmin], async (req, res) => {
 router.put("/like/:id", [validObjectId, auth], async (req, res) => {
   let resMessage = "Remove from your liked song";
   const song = await Song.findById(req.params.id);
-  if (!song) return res.status(400).send({ message: "song dose not exit" });
+  if (!song) return res.status(400).send({ message: "Song does not exist" });
 
   const user = await User.findById(req.user._id);
   const index = user.likedSongs.indexOf(song._id);
@@ -212,7 +233,6 @@ router.put("/like/:id", [validObjectId, auth], async (req, res) => {
  *       '401':
  *         description: Unauthorized. User not authenticated.
  */
-
 
 // get all liked song
 router.get("/like", auth, async (req, res) => {

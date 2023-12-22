@@ -14,6 +14,32 @@ const validObjectID = require("../middleware/validObjectId");
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     UserInput:
+ *       type: object
+ *       properties:
+ *         // Define your UserInput properties here
+
+ *     UsersList:
+ *       type: array
+ *       items:
+ *         $ref: '#/components/schemas/UserResponse'
+
+ *     User:
+ *       type: object
+ *       properties:
+ *         // Define your User properties here
+
+ *     UserResponse:
+ *       type: object
+ *       properties:
+ *         data:
+ *           $ref: '#/components/schemas/User'
+ */
+
+/**
+ * @swagger
  * /api/users:
  *   post:
  *     summary: Create a new user
@@ -46,7 +72,7 @@ router.post("/", async (req, res) => {
   if (user)
     return res
       .status(403)
-      .send({ message: "User with given email already exit!!" });
+      .send({ message: "User with given email already exists!!" });
 
   const salt = await bcrypt.genSalt(Number(process.env.SALT));
   const hashPassword = await bcrypt.hash(req.body.password, salt);
