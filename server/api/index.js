@@ -12,6 +12,11 @@ const searchRoutes = require("../routes/search");
 
 const app = express();
 
+// **Middleware Ordering:**
+// Ensure correct middleware ordering
+app.use(cors()); // Apply CORS before parsing JSON
+app.use(express.json()); // Parse JSON bodies
+
 // Swagger Options
 const swaggerOptions = {
   definition: {
@@ -27,7 +32,6 @@ const swaggerOptions = {
       },
     ],
   },
-  // Specify the paths to your route files
   apis: ["./routes/*.js"],
 };
 
@@ -39,15 +43,10 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Database connection
 connection();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-
 // Default route
 app.get("/", (req, res) => {
   res.send("Lofi-BTB API");
 });
-
 
 app.use("/api/users", userRoutes);
 app.use("/api/login", authRoutes);
