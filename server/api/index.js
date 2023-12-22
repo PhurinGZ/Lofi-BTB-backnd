@@ -32,6 +32,7 @@ const swaggerOptions = {
       },
     ],
   },
+  // Paths to the API docs files
   apis: ["./routes/*.js"],
 };
 
