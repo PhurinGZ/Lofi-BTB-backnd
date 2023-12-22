@@ -23,26 +23,31 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: ["http://localhost:8080","https://lofi-btb-backnd.vercel.app"],
-        description: "Development server",
+        url: "https://lofi-btb-backnd.vercel.app",
       },
     ],
   },
-  apis: ["../routes/*.js"], // Path to the API routes
+  // Specify the paths to your route files
+  apis: ["./routes/*.js"],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
+// Serve Swagger documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Database connection
 connection();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
+// Default route
 app.get("/", (req, res) => {
   res.send("Lofi-BTB API");
 });
 
-// Serve Swagger documentation
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/users", userRoutes);
 app.use("/api/login", authRoutes);
@@ -50,6 +55,7 @@ app.use("/api/songs", songsRoutes);
 app.use("/api/playlists", playlistRoutes);
 app.use("/api/", searchRoutes);
 
+// Start the server
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
