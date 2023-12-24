@@ -1,42 +1,7 @@
 const router = require("express").Router();
 const { User } = require("../models/user");
 const bcrypt = require("bcrypt");
-/**
- * @swagger
- * tags:
- *   name: Authentication
- *   description: User authentication operations
- *
- * /api/login:
- *   post:
- *     summary: Authenticate user
- *     tags: [Authentication]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *               password:
- *                 type: string
- *             required:
- *               - email
- *               - password
- *     responses:
- *       '200':
- *         description: Successful authentication
- *         content:
- *           application/json:
- *             example: { data: "<JWT_TOKEN>", message: "Signing in please wait..." }
- *       '400':
- *         description: Invalid email or password
- *         content:
- *           application/json:
- *             example: { message: "Invalid email or password" }
- */
+
 router.post("/", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user)

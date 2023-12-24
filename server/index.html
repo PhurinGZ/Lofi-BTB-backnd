@@ -12,15 +12,19 @@
     <div id="swagger-ui"></div>
     <script src="https://unpkg.com/swagger-ui-dist@4.5.0/swagger-ui-bundle.js"></script>
     <script>
-      window.onload = () => {
-        const ui = SwaggerUIBundle({
-          url: "./swagger.json",
-          dom_id: "#swagger-ui",
-          presets: [SwaggerUIBundle.presets.apis,
-          SwaggerUIBundle.],
-          layout: "BaseLayout",
-        });
-      };
+          window.onload = () => {
+            const ui = SwaggerUIBundle({
+              url: "./swagger.json",
+              requestInterceptor: (req) => {
+        req.headers.Authorization = "Bearer xxxxxxx"
+        return req
+      },
+              dom_id: "#swagger-ui",
+              presets: [SwaggerUIBundle.presets.apis,
+              SwaggerUIBundle.],
+              layout: "BaseLayout",
+            });
+          };
     </script>
   </body>
 </html>

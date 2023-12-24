@@ -9,8 +9,6 @@ const authRoutes = require("../routes/auth");
 const songsRoutes = require("../routes/songs");
 const playlistRoutes = require("../routes/playList");
 const searchRoutes = require("../routes/search");
-const { SwaggerUIBundle } = require("swagger-ui-dist");
-const { required } = require("joi");
 
 const app = express();
 
@@ -18,30 +16,6 @@ const app = express();
 // Ensure correct middleware ordering
 app.use(cors()); // Apply CORS before parsing JSON
 app.use(express.json()); // Parse JSON bodies
-
-// Swagger Options
-const swaggerOptions = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Lofi-BTB API",
-      version: "1.0.0",
-      description: "API documentation for Lofi-BTB",
-    },
-    servers: [
-      {
-        url: "https://lofi-btb-backnd.vercel.app",
-      },
-    ],
-  },
-  // Paths to the API docs files
-  apis: ["./routes/*.js"],
-};
-
-const swaggerSpec = swaggerJsdoc(swaggerOptions);
-
-// Serve Swagger documentation
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Database connection
 connection();
