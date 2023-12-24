@@ -9,14 +9,14 @@ const songSchema = new mongoose.Schema({
   duration: { type: String, required: true },
 });
 
-const validate = (song) => {
+const validate = (songs) => {
   const schema = joi.object({
     name: joi.string().required(),
     artist: joi.string().required(),
     song: joi.string().required(),
     duration: joi.string().required(),
   });
-  return schema.validate(song);
+  return schema.validate(songs);
 };
 
 const Song = mongoose.model("song", songSchema);

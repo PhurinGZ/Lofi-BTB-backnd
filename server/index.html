@@ -16,7 +16,7 @@
             const ui = SwaggerUIBundle({
               url: "./swagger.json",
               requestInterceptor: (req) => {
-        req.headers.Authorization = "Bearer xxxxxxx"
+              req.headers.Authorization = "Bearer xxxxxxx"
         return req
       },
               dom_id: "#swagger-ui",
