@@ -10,6 +10,7 @@ const songsRoutes = require("../routes/songs");
 const playlistRoutes = require("../routes/playList");
 const searchRoutes = require("../routes/search");
 const { SwaggerUIBundle } = require("swagger-ui-dist");
+const { required } = require("joi");
 
 const app = express();
 
