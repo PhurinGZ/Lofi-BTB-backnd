@@ -22,9 +22,8 @@
               version: "1.0.0",
               description: "Your API Description",
             },
-            // ... (the rest of your OpenAPI definition)
+            apis: ["./routes/*.js"],
           },
-          url: "./swagger.json",
           dom_id: "#swagger-ui",
           presets: [SwaggerUIBundle.presets.apis],
           layout: "BaseLayout",
