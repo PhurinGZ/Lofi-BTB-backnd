@@ -2,13 +2,13 @@
   "definition": {
     "openapi": "3.0.0",
     "info": {
-      "title": "Your API Title",
+      "title": "Lofi-BTB API",
       "version": "1.0.0",
-      "description": "Your API Description"
+      "description": "API documentation for Lofi-BTB"
     },
     "servers": [
       {
-        "url": "https://your-api-url.com"
+        "url": "https://lofi-btb-backnd.vercel.app"
       }
     ],
     "tags": [
