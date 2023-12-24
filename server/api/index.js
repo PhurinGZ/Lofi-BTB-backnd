@@ -9,6 +9,7 @@ const authRoutes = require("../routes/auth");
 const songsRoutes = require("../routes/songs");
 const playlistRoutes = require("../routes/playList");
 const searchRoutes = require("../routes/search");
+const { SwaggerUIBundle } = require("swagger-ui-dist");
 
 const app = express();
 
