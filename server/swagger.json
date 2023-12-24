@@ -728,7 +728,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SongsList"
+                  "$ref": "#/components/schemas/SongResponseGetAll"
                 }
               }
             }
@@ -765,7 +765,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SongInput"
+                "$ref": "#/components/schemas/SongInputUpdate"
               }
             }
           }
@@ -776,12 +776,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SongResponse"
+                  "$ref": "#/components/schemas/SongResponseUpdate"
                 }
               }
             }
           },
-          "401": {
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid token"
+                    }
+                  }
+                }
+              }
+            },
             "description": "Unauthorized. User not authenticated."
           },
           "403": {
@@ -851,13 +863,37 @@
         ],
         "responses": {
           "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Added to your liked song"
+                    }
+                  }
+                }
+              }
+            },
             "description": "Operation successful. Song liked or unliked."
           },
           "401": {
             "description": "Unauthorized. User not authenticated."
           },
           "400": {
-            "description": "Bad request. Song does not exist."
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid token"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Bad request. Invalid token."
           }
         }
       }
@@ -877,12 +913,48 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SongsList"
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "example": [
+                        {
+                          "_id": "658816be6befb79f370a094d",
+                          "name": "My Song2",
+                          "artist": "Artist Name2",
+                          "song": "some.mp3",
+                          "img": "some.jpg",
+                          "duration": "5",
+                          "__v": 0
+                        },
+                        {
+                          "_id": "6587f2a4d4f1e5bb833ff400",
+                          "name": "My Song3",
+                          "artist": "Artist Name3",
+                          "song": "some.mp3",
+                          "img": "some.jpg",
+                          "duration": "5",
+                          "__v": 0
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
           },
-          "401": {
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid token"
+                    }
+                  }
+                }
+              }
+            },
             "description": "Unauthorized. User not authenticated."
           }
         }
@@ -1145,11 +1217,7 @@
       "Song": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string",
-            "example": "60ae0fcb6fda0441b4725672"
-          },
-          "title": {
+          "name": {
             "type": "string",
             "example": "My Song"
           },
@@ -1157,9 +1225,56 @@
             "type": "string",
             "example": "Artist Name"
           },
+          "song": {
+            "type": "string",
+            "example": "some.mp3"
+          },
+          "img": {
+            "type": "string",
+            "example": "some.jpg"
+          },
           "duration": {
             "type": "number",
             "example": 240
+          },
+          "_id": {
+            "type": "string",
+            "example": "60ae0fcb6fda0441b4725672"
+          },
+          "__v": {
+            "type": "integer"
+          }
+        }
+      },
+      "SongUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "My Song2"
+          },
+          "artist": {
+            "type": "string",
+            "example": "Artist Name2"
+          },
+          "song": {
+            "type": "string",
+            "example": "some.mp3"
+          },
+          "img": {
+            "type": "string",
+            "example": "some.jpg"
+          },
+          "duration": {
+            "type": "number",
+            "example": 5
+          },
+          "_id": {
+            "type": "string",
+            "example": "60ae0fcb6fda0441b4725672"
+          },
+          "__v": {
+            "type": "integer"
           }
         }
       },
@@ -1320,6 +1435,31 @@
           }
         }
       },
+      "SongInputUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "My Song2"
+          },
+          "artist": {
+            "type": "string",
+            "example": "Artist Name2"
+          },
+          "song": {
+            "type": "string",
+            "example": "some.mp3"
+          },
+          "img": {
+            "type": "string",
+            "example": "some.jpg"
+          },
+          "duration": {
+            "type": "string",
+            "example": "5"
+          }
+        }
+      },
       "SongsList": {
         "type": "array",
         "items": {
@@ -1327,6 +1467,30 @@
         }
       },
       "SongResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Song"
+          },
+          "message": {
+            "type": "string",
+            "example": "Song created successfully"
+          }
+        }
+      },
+      "SongResponseUpdate": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SongUpdate"
+          },
+          "message": {
+            "type": "string",
+            "example": "Update song successfully"
+          }
+        }
+      },
+      "SongResponseGetAll": {
         "type": "object",
         "properties": {
           "data": {
