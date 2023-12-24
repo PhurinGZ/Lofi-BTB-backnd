@@ -14,16 +14,7 @@
     <script>
       window.onload = () => {
         const ui = SwaggerUIBundle({
-          spec: {
-            // Paste your OpenAPI definition here
-            openapi: "3.0.0",
-            info: {
-              title: "Your API Title",
-              version: "1.0.0",
-              description: "Your API Description",
-            },
-            apis: ["/routes/*.js"],
-          },
+          url: "./swagger.json",
           dom_id: "#swagger-ui",
           presets: [SwaggerUIBundle.presets.apis],
           layout: "BaseLayout",
