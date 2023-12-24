@@ -14,10 +14,12 @@ const validate = (songs) => {
     name: joi.string().required(),
     artist: joi.string().required(),
     song: joi.string().required(),
+    img: joi.string().required(), 
     duration: joi.string().required(),
   });
   return schema.validate(songs);
 };
+
 
 const Song = mongoose.model("song", songSchema);
 
